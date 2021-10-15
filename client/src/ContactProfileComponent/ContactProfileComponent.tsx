@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Avatar, Grid, InputAdornment, TextField, Tabs, Tab, Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { Button, Avatar, Grid, InputAdornment, TextField, Tabs, Tab, Box, Card, CardMedia, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import EditIcon from '@material-ui/icons/Edit';
@@ -62,9 +62,9 @@ function AddressField(props: AddressFieldProps) {
             id="filled-disabled"
             value={props.id}
             label={props.label}
-            variant="filled"
+            variant="outlined"
             margin="dense"
-            style={{ margin: 8 }}
+            style={{ margin: 8, }}
             size="small"
             InputProps={{
                 endAdornment: (
@@ -105,29 +105,50 @@ const ContactProfileComponent: React.FC<ContactProfileProps> = props => {
 
     return (
         <div>
-            <Button onClick={props.handleEdit}>
+            <CardMedia
+                component="img"
+                alt="green iguana"
+                height="140"
+                image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+            />
+            <Button
+                onClick={props.handleEdit}
+            >
                 <EditIcon />
             </Button>
-            <Button onClick={props.handleClose} style={{ float: "right" }}>
+            <Button
+                onClick={props.handleClose}
+                style={{ float: "right" }}
+            >
                 <CloseIcon />
             </Button>
+
             <Grid
                 container
                 direction="column"
                 justify="space-evenly"
                 alignItems="center"
             >
+                <Avatar
+                    src={props.logo}
+                    style={{
+                        height: "150px",
+                        width: "150px",
+                        top: "150px",
+
+                        position: "absolute"
+                    }} >
+                </Avatar>
+
                 <Grid item>
-                    <Avatar src={props.logo} style={{ height: "100px", width: "100px" }} >
-                    </Avatar>
+                    {props.name}
                 </Grid>
 
                 <Grid item>
-                    <h1>{props.name}</h1>
-                </Grid>
-
-                <Grid item>
-                    available balance: ${props.available} NZD
+                    <p>
+                        <span style={{ fontSize: "20px", padding: "15px" }}>{props.name}</span>
+                        <span style={{ fontSize: "30px", padding: "15px" }}>${props.available}</span>
+                    </p>
                 </Grid>
 
                 <Grid
@@ -135,7 +156,7 @@ const ContactProfileComponent: React.FC<ContactProfileProps> = props => {
                     justify="center"
                     alignItems="center"
                 >
-                    <AddressField handleAlert={handleAlert} id={props.bank_no} label={'Bank no.'} />
+                    <AddressField handleAlert={handleAlert} id={props.bank_no} label={'Acc no.'} />
                     <AddressField handleAlert={handleAlert} id={props.id} label={'id'} />
                 </Grid>
 
@@ -147,43 +168,29 @@ const ContactProfileComponent: React.FC<ContactProfileProps> = props => {
                     <Tab label="Transaction History" {...a11yProps(0)} />
                     <Tab label="Send/Transfer" {...a11yProps(1)} />
                 </Tabs>
-                <TabPanel value={tabIndex} index={0} >
-                    <TableContainer style={{ width: "100%" }}>
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Date</TableCell>
-                                    <TableCell align="right">Transaction SID</TableCell>
-                                    <TableCell align="right">Sent/Recieve</TableCell>
-                                    <TableCell align="right">Status</TableCell>
-                                    <TableCell align="right">Amount</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {props.transactions.map(transaction => {
-                                    return (
-                                        <TableRow>
-                                            <TableCell>{transaction.created_at}</TableCell>
-                                            <TableCell align="left">{transaction.sid}</TableCell>
-                                            <TableCell align="left">{transaction.to.substring(0,14)}...</TableCell>
-                                            <TableCell align="left">{transaction.status}</TableCell>
-                                            <TableCell align="left">${transaction.amount}</TableCell>
-                                        </TableRow>
-                                    )
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </TabPanel>
-                <TabPanel value={tabIndex} index={1}>
-                    <SendForm
-                        id={props.id}
-                        available={props.available}
-                        handleSubmit={props.handleSend}
-                        handleError={props.handleAlert}
-                    />
-                </TabPanel>
+                
             </Grid>
+            <TabPanel value={tabIndex} index={0} >
+                {props.transactions.map(transaction => {
+                    return (
+                        <Card variant="outlined">
+                            <TableCell>{transaction.created_at}</TableCell>
+                            <TableCell align="left">{transaction.sid}</TableCell>
+                            <TableCell align="left">{transaction.to.substring(0, 14)}...</TableCell>
+                            <TableCell align="left">{transaction.status}</TableCell>
+                            <TableCell align="left">${transaction.amount}</TableCell>
+                        </Card>
+                    )
+                })}
+            </TabPanel>
+            <TabPanel value={tabIndex} index={1}>
+                <SendForm
+                    id={props.id}
+                    available={props.available}
+                    handleSubmit={props.handleSend}
+                    handleError={props.handleAlert}
+                />
+            </TabPanel>
         </div>);
 }
 

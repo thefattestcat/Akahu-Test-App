@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Web3 from 'web3';
 import axios from 'axios';
 
 //Material-ui
@@ -240,7 +239,6 @@ function AddressBook() {
   }
 
   const handleWebhook = async () => {
-
     const opts: any = {
       method: 'POST',
       headers: {

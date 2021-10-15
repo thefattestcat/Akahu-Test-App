@@ -42,6 +42,7 @@ app.get('/api/user', express.json(), async (req, res) => {
 })
 
 app.get('/api/transfers', express.json(), async (req, res) => {
+    const query = {};
     const transfers = await akahu.transfers.list(userToken, query);
     res.send(transfers)
 })
