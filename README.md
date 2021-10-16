@@ -8,7 +8,7 @@ Requires npm & yarn.
 
 npm install then run local express server with node index.js in root directory
 
-cd into /client and run "npm install", then "yarn start" to start the development server @ localhost:3000
+cd into /client and run "yarn" to start the development server @ localhost:3000
 
 # Webhooks
 
