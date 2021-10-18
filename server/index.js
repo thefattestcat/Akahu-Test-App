@@ -74,11 +74,10 @@ app.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
 
     // Handle payload
     const { webhook_type, webhook_code, ...params } = payload;
-
+    
     console.log(`Received webhook type: '${webhook_type}', code: ${webhook_code}:`);
     console.log(params);
 
-    // Return a 200 response to acknowledge receipt of the webhook
     console.log('Acknowledging webhook.')
     res.sendStatus(200);
 });
