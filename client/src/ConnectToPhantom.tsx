@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 
 type Event = "connect" | "disconnect";
 
@@ -31,19 +31,20 @@ const ConnectToPhantom = () => {
   }, [phantom])
 
   useEffect(() => {
-    if (window["solana"]?.isPhantom){
-      setPhantom(window["solana"]);
+    const solana = (window as { [key: string]: any })["solana"];
+    if (solana.isPhantom) {
+      setPhantom(solana);
     }
   }, []);
 
-  if(phantom) {
-    if(connected) {
+  if (phantom) {
+    if (connected) {
       return (
-          <button
-            onClick={disconnectHandler}
-          >
-            Disconnect
-          </button>
+        <button
+          onClick={disconnectHandler}
+        >
+          Disconnect
+        </button>
       );
     }
     return (
@@ -56,7 +57,7 @@ const ConnectToPhantom = () => {
   }
 
 
-  
+
 
   return (
     <a
