@@ -9,6 +9,7 @@ const xTokenId = process.env.X_AKAHU_ID;
 
 const akahu = new AkahuClient({ appToken, appSecret });
 
+//function definition
 async function transfer({ amount, from, to, }) {
     let completed = {};
     await akahu.accounts.get(userToken, from)
@@ -28,6 +29,7 @@ async function transfer({ amount, from, to, }) {
     return completed;
 }
 
+//page routing
 const app = express()
 
 app.get('/api/accounts', express.json(), async (req, res) => {
