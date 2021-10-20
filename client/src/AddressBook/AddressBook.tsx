@@ -33,6 +33,8 @@ import AlertInterface from '../Alert/Alert';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
+import ConnectToPhantom from '../ConnectToPhantom';
+
 const drawerWidth = '240';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -433,6 +435,7 @@ function AddressBook() {
 
             <Grid item xs={8}>
               <Grid container className={classes.container}>
+              <ConnectToPhantom />
                 <div className={classes.content}>
                   <Snackbar
                     anchorOrigin={{
